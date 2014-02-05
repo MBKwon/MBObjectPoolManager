@@ -37,6 +37,7 @@
     }
     
     [[MBObjectPoolManager defaultManager] releaseAllObjects];
+    [[MBObjectPoolManager defaultManager] releaseAllMemory];
 }
 
 - (void)didReceiveMemoryWarning
