@@ -11,7 +11,7 @@
 @interface MBObjectPoolManager : NSObject
 
 
-+(MBObjectPoolManager *)defaultManager;
++(instancetype)defaultManager;
 
 -(id)getObjectWithClass:(Class)class;
 -(void)releaseObject:(id)object;
