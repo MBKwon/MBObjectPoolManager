@@ -11,7 +11,7 @@
 
 @protocol ObjectPoolDelegate <NSObject>
 
--(instancetype)initForReusage;
+-(instancetype)initForReuse;
 
 @end
 
