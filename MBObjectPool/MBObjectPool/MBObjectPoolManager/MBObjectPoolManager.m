@@ -83,7 +83,7 @@ static dispatch_queue_t getDispatchQueue () {
 -(void)releaseAllObjects
 {
     dispatch_async(getDispatchQueue(), ^{
-        int usedObjectCount = [_usedObjectPool count];
+        NSUInteger usedObjectCount = [_usedObjectPool count];
         
         for (int i=0; i<usedObjectCount; i++) {
             [_unUsedObjectPool addObject:_usedObjectPool.lastObject];
