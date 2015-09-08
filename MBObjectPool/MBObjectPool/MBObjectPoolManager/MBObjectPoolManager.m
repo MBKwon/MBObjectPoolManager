@@ -83,7 +83,7 @@ static dispatch_queue_t getDispatchQueue () {
     });
 }
 
--(void)releaseAllOnMemory
+-(void)removeAllFromMemory
 {
     dispatch_async(getDispatchQueue(), ^{
         [_objectPoolCollection removeAllObjects];

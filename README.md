@@ -20,7 +20,7 @@ Requires **iOS 5.0 or later**.
 -(id)getObjectWithClass:(Class)class;
 -(void)releaseObject:(id)object;
 -(void)releaseAllObjects;
--(void)releaseAllOnMemory;
+-(void)removeAllFromMemory;
 ```
 
 ## Usage
@@ -64,7 +64,7 @@ If you release all objects to free a memory that is allocated by those for reuse
 
 ```objective-c
 
-[[MBObjectPoolManager defaultManager] releaseAllOnMemory];
+[[MBObjectPoolManager defaultManager] removeAllFromMemory];
 
 ```
 

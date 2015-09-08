@@ -74,10 +74,4 @@
     }
 }
 
--(void)releaseAllOnMemory
-{
-    [_unUsedObjectPool removeAllObjects];
-    [_usedObjectPool removeAllObjects];
-}
-
 @end

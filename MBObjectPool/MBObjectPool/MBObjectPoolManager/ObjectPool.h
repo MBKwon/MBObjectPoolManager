@@ -14,6 +14,5 @@
 -(id)getObjectWithClass:(Class)class;
 -(void)releaseObject:(id)object;
 -(void)releaseAllObjects;
--(void)releaseAllOnMemory;
 
 @end
