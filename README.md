@@ -25,7 +25,7 @@ Requires **iOS 5.0 or later**.
 
 ## Usage
 
-You can get object to use. Just call this method. automatically return object in unused object array. If unused object array is empty, return a new object.
+You can get object to reuse it. Just call this method. automatically return object in unused object from a object pool. If the object pool is empty, it would return a new object.
 
 ```objective-c
 
@@ -34,7 +34,7 @@ NSObject *object = [[MBObjectPoolManager defaultManager] getObjectWithClass:[NSO
 ```
 
 
-If a object will be unnecessary, call this method to release a object.
+If a object will be unnecessary, you should call this method to release a object.
 
 ```objective-c
 [[MBObjectPoolManager defaultManager] releaseObject:object];
@@ -42,7 +42,7 @@ If a object will be unnecessary, call this method to release a object.
 ```
 
 
-If you call this method to use a object, the manager will return a object you release before.
+If you call this method to reuse a object, the object pool manager will return a object you release before.
 
 ```objective-c
 
@@ -51,7 +51,7 @@ NSObject *object = [[MBObjectPoolManager defaultManager] getObjectWithClass:[obj
 ```
 
 
-If you release all objects, call this method
+If you release all objects, should call this method
 
 ```objective-c
 
@@ -60,7 +60,7 @@ If you release all objects, call this method
 ```
 
 
-If you free memory without reusing objects, call this method
+If you release all objects to free a memory that is allocated by those for reuse, should call this method
 
 ```objective-c
 
