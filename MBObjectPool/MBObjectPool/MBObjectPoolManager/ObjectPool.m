@@ -54,13 +54,14 @@
 }
 
 -(void)releaseObject:(id)object
-{        for (NSObject *object in _usedObjectPool) {
-    if ([object isEqual:object] == YES) {
-        [_unUsedObjectPool addObject:object];
-        [_usedObjectPool removeObject:object];
-        break;
+{
+    for (NSObject *object in _usedObjectPool) {
+        if ([object isEqual:object] == YES) {
+            [_unUsedObjectPool addObject:object];
+            [_usedObjectPool removeObject:object];
+            break;
+        }
     }
-}
 }
 
 -(void)releaseAllObjects

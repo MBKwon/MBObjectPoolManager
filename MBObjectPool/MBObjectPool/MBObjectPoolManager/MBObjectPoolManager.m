@@ -86,11 +86,7 @@ static dispatch_queue_t getDispatchQueue () {
 -(void)releaseAllOnMemory
 {
     dispatch_async(getDispatchQueue(), ^{
-        NSArray *allKeys = _objectPoolCollection.allKeys;
-        for (id key in allKeys) {
-            ObjectPool *pool = _objectPoolCollection[key];
-            [pool releaseAllOnMemory];
-        }
+        [_objectPoolCollection removeAllObjects];
     });
 }
 
