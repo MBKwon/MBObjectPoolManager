@@ -25,7 +25,7 @@ Requires **iOS 5.0 or later**.
 
 ## Usage
 
-You can get object to reuse it. Just call this method. automatically return object in unused object from a object pool. If the object pool is empty, it would return a new object.
+You can get object to reuse it. Just call this method. Return a unused object automatically from a object pool. If the object pool is empty, it would return a new object.
 
 ```objective-c
 
