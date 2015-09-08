@@ -32,13 +32,7 @@
 
 -(id)getObjectWithClass:(Class)class
 {
-    id unUsedObject;
-    for (id object in _unUsedObjectPool) {
-        if ([object isKindOfClass:class] == YES) {
-            unUsedObject = object;
-            break;
-        }
-    }
+    id unUsedObject = _unUsedObjectPool.firstObject;
     
     if (unUsedObject == nil) {
         unUsedObject = [class new];
