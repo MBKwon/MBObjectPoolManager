@@ -59,8 +59,8 @@ static dispatch_queue_t getDispatchQueue () {
             [_usedObjectPool addObject:unUsedObject];
             
         } else {
-            if ([unUsedObject respondsToSelector:@selector(initForReusage)]) {
-                unUsedObject = [unUsedObject initForReusage];
+            if ([unUsedObject respondsToSelector:@selector(initForReuse)]) {
+                unUsedObject = [unUsedObject initForReuse];
             }
             
             [_usedObjectPool addObject:unUsedObject];
