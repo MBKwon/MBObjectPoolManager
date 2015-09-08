@@ -8,6 +8,15 @@
 
 #import <Foundation/Foundation.h>
 
+
+@protocol ObjectPoolDelegate <NSObject>
+
+-(instancetype)initForReusage;
+
+@end
+
+
+
 @interface MBObjectPoolManager : NSObject
 
 

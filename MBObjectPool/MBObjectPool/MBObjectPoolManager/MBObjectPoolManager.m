@@ -44,10 +44,10 @@ static dispatch_queue_t getDispatchQueue () {
 
 -(id)getObjectWithClass:(Class)class
 {
-    __block NSObject *unUsedObject;
+    __block id<ObjectPoolDelegate> unUsedObject;
     dispatch_sync(getDispatchQueue(), ^{
         
-        for (NSObject *object in _unUsedObjectPool) {
+        for (id object in _unUsedObjectPool) {
             if ([object isKindOfClass:class] == YES) {
                 unUsedObject = object;
                 break;
@@ -59,6 +59,10 @@ static dispatch_queue_t getDispatchQueue () {
             [_usedObjectPool addObject:unUsedObject];
             
         } else {
+            if ([unUsedObject respondsToSelector:@selector(initForReusage)]) {
+                unUsedObject = [unUsedObject initForReusage];
+            }
+            
             [_usedObjectPool addObject:unUsedObject];
             [_unUsedObjectPool removeObject:unUsedObject];
         }
