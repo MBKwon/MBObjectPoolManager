@@ -22,6 +22,8 @@
 		F515D2F018A2785A00A0FF5F /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = F515D2EE18A2785A00A0FF5F /* InfoPlist.strings */; };
 		F515D2F218A2785A00A0FF5F /* MBObjectPoolTests.m in Sources */ = {isa = PBXBuildFile; fileRef = F515D2F118A2785A00A0FF5F /* MBObjectPoolTests.m */; };
 		F515D2FD18A2788100A0FF5F /* MBObjectPoolManager.m in Sources */ = {isa = PBXBuildFile; fileRef = F515D2FC18A2788100A0FF5F /* MBObjectPoolManager.m */; };
+		FEFE3B551B9EB86400D58045 /* ObjectPool.m in Sources */ = {isa = PBXBuildFile; fileRef = FEFE3B541B9EB86400D58045 /* ObjectPool.m */; };
+		FEFE3B561B9EB86400D58045 /* ObjectPool.m in Sources */ = {isa = PBXBuildFile; fileRef = FEFE3B541B9EB86400D58045 /* ObjectPool.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -56,6 +58,8 @@
 		F515D2F118A2785A00A0FF5F /* MBObjectPoolTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MBObjectPoolTests.m; sourceTree = "<group>"; };
 		F515D2FB18A2788100A0FF5F /* MBObjectPoolManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MBObjectPoolManager.h; path = MBObjectPoolManager/MBObjectPoolManager.h; sourceTree = "<group>"; };
 		F515D2FC18A2788100A0FF5F /* MBObjectPoolManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MBObjectPoolManager.m; path = MBObjectPoolManager/MBObjectPoolManager.m; sourceTree = "<group>"; };
+		FEFE3B531B9EB86400D58045 /* ObjectPool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ObjectPool.h; path = MBObjectPoolManager/ObjectPool.h; sourceTree = "<group>"; };
+		FEFE3B541B9EB86400D58045 /* ObjectPool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ObjectPool.m; path = MBObjectPoolManager/ObjectPool.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -122,6 +126,8 @@
 				F515D2DC18A2785A00A0FF5F /* DemoViewController.m */,
 				F515D2FB18A2788100A0FF5F /* MBObjectPoolManager.h */,
 				F515D2FC18A2788100A0FF5F /* MBObjectPoolManager.m */,
+				FEFE3B531B9EB86400D58045 /* ObjectPool.h */,
+				FEFE3B541B9EB86400D58045 /* ObjectPool.m */,
 				F515D2DE18A2785A00A0FF5F /* Images.xcassets */,
 				F515D2CD18A2785A00A0FF5F /* Supporting Files */,
 			);
@@ -257,6 +263,7 @@
 				F515D2DD18A2785A00A0FF5F /* DemoViewController.m in Sources */,
 				F515D2FD18A2788100A0FF5F /* MBObjectPoolManager.m in Sources */,
 				F515D2D718A2785A00A0FF5F /* AppDelegate.m in Sources */,
+				FEFE3B551B9EB86400D58045 /* ObjectPool.m in Sources */,
 				F515D2D318A2785A00A0FF5F /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -265,6 +272,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FEFE3B561B9EB86400D58045 /* ObjectPool.m in Sources */,
 				F515D2F218A2785A00A0FF5F /* MBObjectPoolTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -466,6 +474,7 @@
 				F515D2F718A2785A00A0FF5F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		F515D2F818A2785A00A0FF5F /* Build configuration list for PBXNativeTarget "MBObjectPoolTests" */ = {
 			isa = XCConfigurationList;
@@ -474,6 +483,7 @@
 				F515D2FA18A2785A00A0FF5F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

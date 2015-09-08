@@ -7,6 +7,7 @@
 //
 
 #import "MBObjectPoolManager.h"
+#import "ObjectPool.h"
 
 static dispatch_queue_t getDispatchQueue () {
     static dispatch_queue_t dispatchQ;
@@ -20,8 +21,7 @@ static dispatch_queue_t getDispatchQueue () {
 
 @interface MBObjectPoolManager ()
 
-@property (strong, nonatomic) NSMutableArray *unUsedObjectPool;
-@property (strong, nonatomic) NSMutableArray *usedObjectPool;
+@property (strong, nonatomic) NSMutableDictionary *objectPoolCollection;
 
 @end
 
@@ -35,11 +35,21 @@ static dispatch_queue_t getDispatchQueue () {
     dispatch_once(&onceToken, ^{
         instance = [MBObjectPoolManager new];
         
-        instance.unUsedObjectPool = [NSMutableArray new];
-        instance.usedObjectPool = [NSMutableArray new];
+        instance.objectPoolCollection = [NSMutableDictionary new];
     });
     
     return instance;
+}
+
+-(ObjectPool *)getPoolFromCollection:(Class)className
+{
+    ObjectPool *pool = _objectPoolCollection[NSStringFromClass(className)];
+    if (pool == nil) {
+        pool = [ObjectPool new];
+        _objectPoolCollection[NSStringFromClass(className)] = pool;
+    }
+    
+    return pool;
 }
 
 -(id)getObjectWithClass:(Class)class
@@ -47,26 +57,10 @@ static dispatch_queue_t getDispatchQueue () {
     __block id<ObjectPoolDelegate> unUsedObject;
     dispatch_sync(getDispatchQueue(), ^{
         
-        for (id object in _unUsedObjectPool) {
-            if ([object isKindOfClass:class] == YES) {
-                unUsedObject = object;
-                break;
-            }
+        unUsedObject = [[self getPoolFromCollection:class] getObjectWithClass:class];
+        if ([unUsedObject respondsToSelector:@selector(initForReuse)]) {
+            unUsedObject = [unUsedObject initForReuse];
         }
-        
-        if (unUsedObject == nil) {
-            unUsedObject = [class new];
-            [_usedObjectPool addObject:unUsedObject];
-            
-        } else {
-            if ([unUsedObject respondsToSelector:@selector(initForReuse)]) {
-                unUsedObject = [unUsedObject initForReuse];
-            }
-            
-            [_usedObjectPool addObject:unUsedObject];
-            [_unUsedObjectPool removeObject:unUsedObject];
-        }
-        
     });
     return unUsedObject;
 }
@@ -74,33 +68,29 @@ static dispatch_queue_t getDispatchQueue () {
 -(void)releaseObject:(id)object
 {
     dispatch_async(getDispatchQueue(), ^{
-        for (NSObject *object in _usedObjectPool) {
-            if ([object isEqual:object] == YES) {
-                [_unUsedObjectPool addObject:object];
-                [_usedObjectPool removeObject:object];
-                break;
-            }
-        }
+        [[self getPoolFromCollection:[object class]] releaseObject:object];
     });
 }
 
 -(void)releaseAllObjects
 {
     dispatch_async(getDispatchQueue(), ^{
-        NSUInteger usedObjectCount = [_usedObjectPool count];
-        
-        for (int i=0; i<usedObjectCount; i++) {
-            [_unUsedObjectPool addObject:_usedObjectPool.lastObject];
-            [_usedObjectPool removeLastObject];
+        NSArray *allKeys = _objectPoolCollection.allKeys;
+        for (id key in allKeys) {
+            ObjectPool *pool = _objectPoolCollection[key];
+            [pool releaseAllObjects];
         }
     });
 }
 
--(void)releaseAllMemory
+-(void)releaseAllOnMemory
 {
     dispatch_async(getDispatchQueue(), ^{
-        [_unUsedObjectPool removeAllObjects];
-        [_usedObjectPool removeAllObjects];
+        NSArray *allKeys = _objectPoolCollection.allKeys;
+        for (id key in allKeys) {
+            ObjectPool *pool = _objectPoolCollection[key];
+            [pool releaseAllOnMemory];
+        }
     });
 }
 
